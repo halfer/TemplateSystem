@@ -31,7 +31,7 @@ if (!class_exists('TemplateSystem'))
 		public function renderComponent($class, $template)
 		{
 			// Load component base and specific component classes
-			require_once $this->root . '/lib/TemplateComponentBase.php';
+			require_once dirname(__FILE__) . '/TemplateComponentBase.php';
 			require_once $this->root . '/components/' . $class . '.php';
 
 			// Ensure the new thing extends the base correctly

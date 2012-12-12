@@ -40,7 +40,7 @@ The component base class will be loaded automatically if it is required.
 Usage
 -----
 
-Your entry point to the plugin should create a controller class, which is a descendent of the TemplateSystem class. Personally, I like to extend TemplateSystem to a base class for the whole plugin (e.g. MyPluginBase) and then any plugin entry points can extend that. That helps provide a common parent in which shared controller code may reside.
+Your entry point to the plugin should create a controller class, which is a descendent of the `TemplateSystem` class. Personally, I like to extend TemplateSystem to a base class for the whole plugin (e.g. MyPluginBase) and then any plugin entry points can extend that. That helps provide a common parent in which shared controller code may reside.
 
 When instantiating a controller, the full path of the plugin should be provided to the constructor:
 
@@ -51,15 +51,15 @@ When rendering a template in a controller, we use something like this:
 
     <?php $this->renderTemplate('info', array('usefulData' => $usefulData)) ?>
 
-This expects a file "templates/info.php" to exist in the plugin, to render this view. The developer can then expect $usefulData to be available in that template as supplied, as well as $this, pointing at the controller instance.
+This expects a file `templates/info.php` to exist in the plugin, to render this view. The developer can then expect `$usefulData` to be available in that template as supplied, as well as `$this`, pointing at the controller instance.
 
 If the developer wishes to call a template from a template, he/she can do so thusly:
 
     <?php $this->renderPartial('snippet', array('usefulData' => $usefulData)) ?>
 
-This will look up the file "templates/_snippet.php", and render it in situ, again with the specified variables passed on. The underscore helps differentiate between a full template file, and a partial template.
+This will look up the file `templates/_snippet.php`, and render it in situ, again with the specified variables passed on. The underscore helps differentiate between a full template file, and a partial template.
 
-The developer may also include a partial with its own logic, otherwise known as a component. To do this, a component class must be created in /components inside the plugin, and it must extend TemplateComponentBase. This may then be called thus:
+The developer may also include a partial with its own logic, otherwise known as a component. To do this, a component class must be created in `/components` inside the plugin, and it must extend `TemplateComponentBase`. This may then be called thus:
 
     <?php $this->renderComponent('ClassName', 'componentName') ?>
 

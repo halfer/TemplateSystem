@@ -85,6 +85,11 @@ Utility methods
 
 The base controller contains a method to access `$_REQUEST`, which is `$this->getInput('key')`. This is preferable to accessing $_REQUEST directly, as it will return null without PHP warnings if the key does not exist.
 
+Future development
+------------------
+
+* Fragment caching, via file or memcache, would be very useful, and should be easy to add.
+
 General
 -------
 

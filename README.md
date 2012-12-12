@@ -70,7 +70,7 @@ This expects a file `templates/info.php` to exist in the plugin, to render this 
 
 If the developer wishes to call a template from a template, he/she can do so thusly:
 
-    <?php $this->renderPartial('snippet', array('usefulData' => $usefulData)) ?>
+    <?php $this->renderPartial( 'snippet', array( 'usefulData' => $usefulData, ) ) ?>
 
 This will look up the file `templates/_snippet.php`, and render it in situ, again with the specified variables passed on. The underscore helps differentiate between a full template file, and a partial template.
 

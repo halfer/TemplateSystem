@@ -78,6 +78,13 @@ The developer may also include a partial with its own logic, otherwise known as 
 
     <?php $this->renderComponent( 'ClassName', 'componentName' ) ?>
 
+Code inside a component can easily access the current controller, via `$this->getController()`.
+
+Utility methods
+---------------
+
+The base controller contains a method to access `$_REQUEST`, which is `$this->getInput('key')`. This is preferable to accessing $_REQUEST directly, as it will return null without PHP warnings if the key does not exist.
+
 General
 -------
 

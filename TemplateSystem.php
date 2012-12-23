@@ -45,6 +45,16 @@ if (!class_exists('TemplateSystem'))
 			$this->renderTemplate('_' . $template, $templateVars);
 		}
 
+		public function getRenderedPartial($template, array $params = array())
+		{
+			$ok = ob_start();
+			$this->renderPartial($template, $params);
+			$contents = ob_get_contents();
+			ob_clean();
+
+			return $contents;			
+		}
+
 		public function getRenderedComponent($class, $template)
 		{
 			$ok = ob_start();

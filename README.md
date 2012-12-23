@@ -80,6 +80,14 @@ The developer may also include a partial with its own logic, otherwise known as 
 
 Code inside a component can easily access the current controller, via `$this->getController()`.
 
+Advanced usage
+--------------
+
+Some occasions call for the rendering of a partial or a component into a variable, rather than to the browser. This is most useful in AJAX operations where the output needs to be converted before being sent to the client. The calls for this are very similar to the rendering calls above:
+
+    $html = $this->getRenderedPartial( 'snippet', array( 'usefulData' => $usefulData, ) );
+    $html = $this->getRenderedComponent( 'ClassName', 'componentName' );
+
 Utility methods
 ---------------
 

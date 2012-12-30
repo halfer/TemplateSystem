@@ -6,6 +6,7 @@ if (!class_exists('TemplateSystem'))
 	abstract class TemplateSystem
 	{
 		protected $root;
+		protected $component;
 
 		public function __construct($root)
 		{
@@ -35,14 +36,24 @@ if (!class_exists('TemplateSystem'))
 			require_once $this->root . '/components/' . $class . '.php';
 
 			// Ensure the new thing extends the base correctly
-			$obj = new $class($this, $this->root);
-			if (!($obj instanceof TemplateComponentBase))
+			$this->component = new $class($this, $this->root);
+			if (!($this->component instanceof TemplateComponentBase))
 			{
 				throw new Exception('Components must extend TemplateComponentBase');
 			}
 
-			$templateVars = $obj->execute();
+			$templateVars = $this->component->execute();
 			$this->renderTemplate('_' . $template, $templateVars);
+		}
+
+		/**
+		 * Gets the current component instance (useful in the component template)
+		 * 
+		 * @return TemplateComponentBase
+		 */
+		protected function getComponentInstance()
+		{
+			return $this->component;
 		}
 
 		public function getRenderedPartial($template, array $params = array())

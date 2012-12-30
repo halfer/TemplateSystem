@@ -83,7 +83,7 @@ The developer may also include a partial with its own logic, otherwise known as 
 
 Code inside a component instance can easily access the current controller, via `$this->getController()`.
 
-Code inside a component partial is rendered in the context of the controller, so `$this` will work fine. Access to the component instance itslef can be obtained using `$this->getComponentInstance()`.
+Code inside a component partial is rendered in the context of the controller, so `$this` will work fine. Access to the component instance itself can be obtained using `$this->getComponentInstance()`.
 
 Advanced usage
 --------------

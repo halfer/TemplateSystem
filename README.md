@@ -68,17 +68,22 @@ When rendering a template in a controller - say for an options page - we use som
 
 This expects a file `templates/info.php` to exist in the plugin, to render this view. The developer can then expect `$usefulData` to be available in that template as supplied, as well as `$this`, pointing at the controller instance.
 
-If the developer wishes to call a template from a template, he/she can do so thusly:
+If the developer wishes to call a snippet (otherwise known as a partial) from a template, he/she can do so thusly:
 
     <?php $this->renderPartial( 'snippet', array( 'usefulData' => $usefulData, ) ) ?>
 
-This will look up the file `templates/_snippet.php`, and render it in situ, again with the specified variables passed on. The underscore helps differentiate between a full template file, and a partial template.
+This will look up the file `templates/_snippet.php`, and render it in situ, again with the specified variables passed on. The underscore helps differentiate between a full template and a partial template.
+
+Components
+----------
 
 The developer may also include a partial with its own logic, otherwise known as a component. To do this, a component class must be created in `/components` inside the plugin, and it must extend `TemplateComponentBase`. This may then be called thus:
 
     <?php $this->renderComponent( 'ClassName', 'componentName' ) ?>
 
-Code inside a component can easily access the current controller, via `$this->getController()`.
+Code inside a component instance can easily access the current controller, via `$this->getController()`.
+
+Code inside a component partial is rendered in the context of the controller, so `$this` will work fine. Access to the component instance itslef can be obtained using `$this->getComponentInstance()`.
 
 Advanced usage
 --------------

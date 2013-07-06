@@ -11,10 +11,27 @@ if (!class_exists('TemplateSystem'))
 		public function __construct($root)
 		{
 			$this->root = $root;
+		}
 
-			if (method_exists($this, 'preExecute'))
+		/**
+		 * Call this from the front controller to run all executable methods in the child
+		 */
+		public function runAll()
+		{
+			$run = 0;
+			foreach (array('preExecute', 'execute', 'postExecute') as $method)
 			{
-				$this->preExecute();
+				if (method_exists($this, $method))
+				{
+					$this->$method();
+					$run++;
+				}
+			}
+
+			// If nothing has been run, throw an error
+			if (!$run)
+			{
+				throw new Exception('The child controller class should implement at least one of the preExecute, execute, postExecute methods');
 			}
 		}
 

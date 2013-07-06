@@ -93,6 +93,11 @@ Code inside a component instance can easily access the current controller, via `
 
 Code inside a component partial is rendered in the context of the controller, so `$this` will work fine. Access to the component instance itself can be obtained using `$this->getComponentInstance()`.
 
+Entry points
+------------
+
+In many cases, creating an `execute()` method in the child controller will be sufficient. However, there are two more methods that may be of use: `preExecute()` and `postExecute()`, for initialisation and clean-up respectively. For example, if you have several controller classes, you may wish to inherit from an intermediate class to do some authentication checks or other initialisation. Whilst this _could_ go in the child constructor, that may interfere with your unit testing.
+
 Advanced usage
 --------------
 
@@ -110,6 +115,13 @@ Future development
 ------------------
 
 * Fragment caching, via file or memcache, would be very useful, and should be easy to add.
+
+Version history
+---------------
+
+0.1 - Initial version which ran everything from the constructor. Since this isn't ideal for unit-testing, I changed this in the master branch so that the primary activity of the constructor is called separately.
+
+0.2 (current master) - now supports preExecute, execute and postExecute points at which controller code can be run. Logic being run in the constructor is still possible, but deprecated.
 
 General
 -------

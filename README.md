@@ -55,7 +55,15 @@ When instantiating a controller, the full path of the plugin should be provided 
 	require_once $root . '/lib/MyPluginBase.php';
 	require_once $root . '/lib/MyPluginMain.php';
 
-	new MyPluginMain( $root );
+	$controller = new MyPluginMain( $root );
+	$controller->runAll();
+
+Then, in your controller child, start off by implementing an execute method, thus:
+
+	public function execute()
+	{
+		// Your code goes here
+	}
 
 When rendering a template in a controller - say for an options page - we use something like this:
 

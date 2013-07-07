@@ -1,15 +1,26 @@
 <?php
+/**
+ * This file is part of the TemplateSystem library, a small controller-template system
+ * 
+ * Read more: https://github.com/halfer/TemplateSystem
+ * Licensing terms at the same as Wordpress: http://wordpress.org/about/license/
+ */
+
+// See namespace notes in TemplateSystem.php
+namespace TemplateSystem\Change2;
 
 // Don't define this if it's already been defined
-if (!class_exists('TemplateComponentBase'))
+if (!class_exists('TemplateSystem\Change2\ComponentBase'))
 {
-	abstract class TemplateComponentBase
+	abstract class ComponentBase
 	{
 		protected $controller;
 		protected $root;
 
-		public function __construct(TemplateSystem $controller, $root)
+		public function __construct($controller, $root)
 		{
+			// Check controller is of the right type here
+
 			$this->controller = $controller;
 			$this->root = $root;
 		}

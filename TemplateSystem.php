@@ -1,9 +1,20 @@
 <?php
 
+/**
+ * This file is part of the TemplateSystem library, a small controller-template system
+ * 
+ * Read more: https://github.com/halfer/TemplateSystem
+ * Licensing terms at the same as Wordpress: http://wordpress.org/about/license/
+ */
+
+// The 'ChangeX' namespace component will be bumped whenever a backwards incompatible change
+// is introduced, and will not necessarily track the version number
+namespace TemplateSystem\Change2;
+
 // Don't define this if it's already been defined
-if (!class_exists('TemplateSystem'))
+if (!class_exists('TemplateSystem\Change2\ControllerBase'))
 {
-	abstract class TemplateSystem
+	abstract class ControllerBase
 	{
 		protected $root;
 		protected $component;
@@ -54,7 +65,7 @@ if (!class_exists('TemplateSystem'))
 
 			// Ensure the new thing extends the base correctly
 			$this->component = new $class($this, $this->root);
-			if (!($this->component instanceof TemplateComponentBase))
+			if (!is_subclass_of($this->component, 'TemplateSystem\Change2\ComponentBase'))
 			{
 				throw new Exception('Components must extend TemplateComponentBase');
 			}

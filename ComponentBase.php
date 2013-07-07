@@ -20,6 +20,10 @@ if (!class_exists('TemplateSystem\Change2\ComponentBase'))
 		public function __construct($controller, $root)
 		{
 			// Check controller is of the right type here
+			if (!is_subclass_of($controller, 'TemplateSystem\Change2\ControllerBase'))
+			{
+				throw new Exception('The controller passed to the component must inherit ControllerBase');
+			}
 
 			$this->controller = $controller;
 			$this->root = $root;

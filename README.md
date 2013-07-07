@@ -18,6 +18,13 @@ License
 
 The license terms for TemplateSystem is the same as Wordpress, to make it easy for WP users. That is, this code is licensed under GPLv2 (or later). 
 
+Requirements
+------------
+
+Version 0.1 of this library will work with PHP 5.2.
+
+The current version of this library (master) requires PHP 5.3, since it uses namespaces. For Wordpress plugin authors, be aware that (at the time of writing at least) over half Wordpress installations in the wild are on 5.2 (though since that is out of support, it is to be hoped that they upgrade soon). My recommendation is to specify 5.3 as a minimum requirement for your plugin.
+
 Installing
 ----------
 
@@ -33,36 +40,45 @@ Including
 
 From your template root, you can do just this:
 
-	require_once $root . '/vendor/TemplateSystem/TemplateSystem.php';
+	require_once $root . '/vendor/TemplateSystem/ControllerBase.php';
 
 The component base class will be loaded automatically if it is required.
 
 Usage
 -----
 
-Your entry point to the plugin should create a controller class, which is a descendent of the `TemplateSystem` class. Personally, I like to extend `TemplateSystem` to a base class for the whole plugin (e.g. MyPluginBase) and then any plugin entry points can extend that. That helps provide a common parent in which shared controller code may reside.
+Your entry point to the plugin should create a controller class, which is a descendent of the `ControllerBase` class. Personally, I like to extend `ControllerBase` to a base class for the whole plugin (e.g. MyPluginBase) and then any plugin entry points can extend that. That helps provide a common parent in which shared controller code may reside.
 
 So you could have:
 
-	class MyPluginBase extends TemplateSystem {} /* in lib/MyPluginBase.php */
+	class MyPluginBase extends ControllerBase {} /* in lib/MyPluginBase.php */
 	class MyPluginMain extends MyPluginBase {} /* in lib/MyPluginMain.php */
 
 When instantiating a controller, the full path of the plugin should be provided to the constructor:
 
 	$root = dirname(__FILE__);
 
-	require_once $root . '/vendor/TemplateSystem/TemplateSystem.php';
+	require_once $root . '/vendor/TemplateSystem/ControllerBase.php';
 	require_once $root . '/lib/MyPluginBase.php';
 	require_once $root . '/lib/MyPluginMain.php';
 
 	$controller = new MyPluginMain( $root );
 	$controller->runAll();
 
-Then, in your controller child, start off by implementing an execute method, thus:
+In the child of the ControllerBase, you'll want to bring the namespaced class into view:
+
+	use TemplateSystem\Change2\ControllerBase;
+
+	public MyPluginBase extends ControllerBase
+	{
+		// Your parent code goes here
+	}
+
+Then, in your final controller child, extend your parent and start off by implementing an execute method, thus:
 
 	public function execute()
 	{
-		// Your code goes here
+		// Your child code goes here
 	}
 
 When rendering a template in a controller - say for an options page - we use something like this:
@@ -85,7 +101,7 @@ This will look up the file `templates/_snippet.php`, and render it in situ, agai
 Components
 ----------
 
-The developer may also include a partial with its own logic, otherwise known as a component. To do this, a component class must be created in `/components` inside the plugin, and it must extend `TemplateComponentBase`. This may then be called thus:
+The developer may also include a partial with its own logic, otherwise known as a component. To do this, a component class must be created in `/components` inside the plugin, and it must extend `ComponentBase`. This may then be called thus:
 
 	<?php $this->renderComponent( 'ClassName', 'componentName' ) ?>
 
@@ -121,7 +137,7 @@ Version history
 
 0.1 - Initial version which ran everything from the constructor. Since this isn't ideal for unit-testing, I changed this in the master branch so that the primary activity of the constructor is called separately.
 
-0.2 (current master) - now supports preExecute, execute and postExecute points at which controller code can be run. Logic being run in the constructor is still possible, but deprecated.
+0.2 (current master) - now supports preExecute, execute and postExecute points at which controller code can be run. Logic being run in the constructor is still possible, but deprecated. Now requires 5.3 to solve conflicting naming problems between backwards-incompatible versions.
 
 General
 -------

@@ -42,7 +42,7 @@ if (!class_exists('TemplateSystem\Change2\ControllerBase'))
 			// If nothing has been run, throw an error
 			if (!$run)
 			{
-				throw new Exception('The child controller class should implement at least one of the preExecute, execute, postExecute methods');
+				throw new \Exception('The child controller class should implement at least one of the preExecute, execute, postExecute methods');
 			}
 		}
 
@@ -67,7 +67,7 @@ if (!class_exists('TemplateSystem\Change2\ControllerBase'))
 			$this->component = new $class($this, $this->root);
 			if (!is_subclass_of($this->component, 'TemplateSystem\Change2\ComponentBase'))
 			{
-				throw new Exception('Components must extend TemplateComponentBase');
+				throw new \Exception('Components must extend TemplateComponentBase');
 			}
 
 			$templateVars = $this->component->execute();

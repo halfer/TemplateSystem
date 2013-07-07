@@ -60,7 +60,7 @@ if (!class_exists('TemplateSystem\Change2\ControllerBase'))
 		public function renderComponent($class, $template)
 		{
 			// Load component base and specific component classes
-			require_once dirname(__FILE__) . '/TemplateComponentBase.php';
+			require_once dirname(__FILE__) . '/ComponentBase.php';
 			require_once $this->root . '/components/' . $class . '.php';
 
 			// Ensure the new thing extends the base correctly

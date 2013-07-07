@@ -6,7 +6,7 @@
  * Licensing terms at the same as Wordpress: http://wordpress.org/about/license/
  */
 
-// See namespace notes in TemplateSystem.php
+// See namespace notes in ControllerBase.php
 namespace TemplateSystem\Change2;
 
 // Don't define this if it's already been defined
@@ -30,7 +30,7 @@ if (!class_exists('TemplateSystem\Change2\ComponentBase'))
 		/**
 		 * Gets the currently running controller
 		 * 
-		 * @return TemplateSystem
+		 * @return ControllerBase
 		 */
 		public function getController()
 		{

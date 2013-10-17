@@ -49,7 +49,7 @@ if (!class_exists('TemplateSystem\Change2\ControllerBase'))
 		public function renderTemplate($template, array $params = array())
 		{
 			extract($params);
-			require_once "{$this->root}/templates/{$template}.php";
+			require "{$this->root}/templates/{$template}.php";
 		}
 
 		public function renderPartial($template, array $params = array())
